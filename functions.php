@@ -35,34 +35,7 @@ wp_enqueue_script( 'jquery' );
 add_action( 'wp_footer', 'blankslate_footer' );
 function blankslate_footer() {
 ?>
-<script>
-jQuery(document).ready(function($) {
-var deviceAgent = navigator.userAgent.toLowerCase();
-if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
-$("html").addClass("ios");
-$("html").addClass("mobile");
-}
-if (deviceAgent.match(/(Android)/)) {
-$("html").addClass("android");
-$("html").addClass("mobile");
-}
-if (navigator.userAgent.search("MSIE") >= 0) {
-$("html").addClass("ie");
-}
-else if (navigator.userAgent.search("Chrome") >= 0) {
-$("html").addClass("chrome");
-}
-else if (navigator.userAgent.search("Firefox") >= 0) {
-$("html").addClass("firefox");
-}
-else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
-$("html").addClass("safari");
-}
-else if (navigator.userAgent.search("Opera") >= 0) {
-$("html").addClass("opera");
-}
-});
-</script>
+
 <?php
 }
 add_filter( 'document_title_separator', 'blankslate_document_title_separator' );
@@ -121,7 +94,7 @@ return ' <a href="' . esc_url( get_permalink( $post->ID ) ) . '" class="more-lin
 add_filter( 'big_image_size_threshold', '__return_false' );
 add_filter( 'intermediate_image_sizes_advanced', 'blankslate_image_insert_override' );
 function blankslate_image_insert_override( $sizes ) {
-unset( $sizes['medium_large'] );
+//unset( $sizes['medium_large'] );
 unset( $sizes['1536x1536'] );
 unset( $sizes['2048x2048'] );
 return $sizes;
@@ -141,6 +114,12 @@ add_action( 'wp_head', 'blankslate_pingback_header' );
 function blankslate_pingback_header() {
 if ( is_singular() && pings_open() ) {
 printf( '<link rel="pingback" href="%s">' . "\n", esc_url( get_bloginfo( 'pingback_url' ) ) );
+}
+}
+	add_action( 'wp_head', 'asnmbu_meta_description' );
+function asnmbu_meta_description() {
+if ( is_front_page() ) {
+printf('<meta name="description" content="Ås-NMBU Orientering er orienteringsklubben for studenter og fastboende i Ås"/>');
 }
 }
 add_action( 'comment_form_before', 'blankslate_enqueue_comment_reply_script' );
@@ -165,3 +144,24 @@ return count( $comments_by_type['comment'] );
 return $count;
 }
 }
+
+add_filter( 'wp_default_scripts', 'change_default_jquery' );
+
+function change_default_jquery( &$scripts){
+    if(!is_admin()){
+        $scripts->remove( 'jquery');
+        $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.10.2' );
+    }
+}
+add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
+function wps_deregister_styles() {
+    wp_dequeue_style( 'wp-block-library' );
+}
+add_action('init', function() {
+  remove_post_type_support('post', 'markup_markdown');
+});
+
+function custom_excerpt_length($length) {
+    return 20;// Set the desired word count
+}
+add_filter('excerpt_length', 'custom_excerpt_length');

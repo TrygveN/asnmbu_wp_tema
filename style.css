@@ -5,7 +5,7 @@ Author: Trygve
 Author URI: https://trygve.net
 Description: Donate: Baser på: https://blankslate.me/. 
 Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2025
+Version: 2025.1
 Requires at least: 5.2
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -19,11 +19,13 @@ BlankSlate is distributed under the terms of the GNU GPL
 
 @font-face {
     font-family: Asap;
+	font-display: swap;
     src: url("/website_3c4ea913/wp-content/fonts/Asap-Regular.woff2");
 }
 @font-face {
     font-family: Asap;
     font-weight: bold;
+	font-display: swap;
     src: url("/website_3c4ea913/wp-content/fonts/Asap-Bold.woff2");
 }
 
@@ -102,10 +104,14 @@ BlankSlate is distributed under the terms of the GNU GPL
   --tr-duration: 0.2s;
   --ct-width: 1200px;
 }
-
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 600px) and (max-width: 1800px){
   :root {
     --ft-size: 18px;
+  }
+}
+@media screen and (max-width: 600px) {
+  :root {
+    --ft-size: 16px;
   }
 }
 
@@ -319,10 +325,6 @@ body, :host {
   color: var(--default);
 }
 
-main, header {
-  margin: 0 0 1rem;
-}
-
 body > header:first-child, body > footer:last-child {
   margin-right: -1.5rem;
   margin-left: -1.5rem;
@@ -366,11 +368,11 @@ article {
 
 @media screen and (max-width: 600px) {
 	article {
-		margin: 0.1rem;
+		margin: 0rem;
 		padding-top: 0rem;
 		padding-bottom: 0rem;
-		padding-left: 0.2rem;
-		padding-right: 0.2rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }
 
@@ -459,23 +461,23 @@ small {
 	gap: 10px;
 	flex-wrap: wrap;
 }
-.menu li {
+.menu li a, .fancy-link{
+	display: block;
 	font-size: 1.4em;
 	font-weight: bold;
 	background-color: #1A5FB4;
 	filter: drop-shadow(8px 8px 0 black);
 	margin-right: 8px;
-	margin-bottom: 8px
+	margin-bottom: 8px;
+	color: #FFFFFF;
+	max-width: fit-content;
 }
-.menu li:hover {
+.menu li a:hover, .fancy-link:hover {
 	filter: none;
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-top: 8px;
 	margin-left: 8px;
-}
-.menu li a {
-	color: #FFFFFF;
 }
 @media screen and (max-width: 600px) {
 	#header {
@@ -486,12 +488,18 @@ small {
 	#branding {
 		margin: auto;
 	}
-	.menu li {
+	.menu li a, .fancy-link{
 		font-size: 1.2em;
+	}
+	p img, .wp-caption img, .wp-caption {
+		width: unset !important;
+		height: unset !important;
+		max-width: 100%;
+		max-height: 100%;
 	}
 }
 @media (prefers-color-scheme: dark) {
-	.menu li {
+	.menu li a, .fancy-link{
 	filter: drop-shadow(8px 8px 0 			#224670);
 }
 }
@@ -764,6 +772,8 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 	display: block;
   margin-left: auto;
   margin-right: auto;
+	width: unset !important;
+  height: unset !important;
 }
 .nmbui-card{
 	background-color: var(--bg-blue);
@@ -797,9 +807,6 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		width: 100%;
 	  padding:0.2rem;
 	}
-	.cards div img{
-		height: 100px;
-}
 	.flex{
 		flex-wrap: wrap;
 	}
@@ -811,25 +818,40 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
   overflow: hidden;
   margin: 0;
   display: grid;
-	grid-template-columns: 20% 60% 20%;
+	grid-template-columns: 130px auto 450px;
 	grid-template-areas: 
     "sidebar-left content sidebar";
 }
 .wp-post-image {
-	max-width: 60% !important;
+	max-width: 80% !important;
 	max-height: 500px !important;
 	object-fit: contain;
 	margin-left: auto;
 	margin-right: auto;
 }
-
+.attachment-post-thumbnail{
+	height: unset !important;
+  	width: unset !important;
+	max-height: 250px !important;
+	max-width: 100% !important;
+}
+.attachment-full {
+	width: unset !important;
+	height: unset !important;
+	max-width: 100%;
+}
+.wp-block-image {
+	max-width: 80% !important;
+	max-height: 500px !important;
+}
 #content {
   grid-area: content;
 }
 
 #sidebar {
   grid-area: sidebar;
-	font-size: 0.95rem;
+  font-size: 0.95rem;
+	margin-right: 2rem;
 }
 
 #sidebar-left {
@@ -838,7 +860,12 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 #sidebar-left a {
 	display: block;
 }
-
+#content {
+	margin: 1rem;
+	max-width: 1200px;
+	min-width: 70%;
+  	justify-self: center;
+}
 
 @media screen and (max-width: 1400px) and (min-width: 1000px) {
 	#container {
@@ -851,6 +878,12 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		"sidebar-left sidebar-left";
 	}
 	.flex{
+		flex-wrap: wrap;
+	}
+}
+@media screen and (max-width: 1400px) {
+	#sidebar-left {
+		display: flex;
 		flex-wrap: wrap;
 	}
 	
@@ -871,10 +904,59 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		max-height: 200px !important;
 		object-fit: contain;
 	}
+	#content {
+		margin: 0;
+	}
+	#sidebar {
+	  grid-area: sidebar;
+	  font-size: 0.95rem;
+		margin: 0rem;
+	}
 }
 
 p img {
-	max-width: 70%;
+	max-width: 85%;
 	margin-left: auto;
 	margin-right: auto;
+}
+#comments ul {
+	padding: 0;
+	max-width: 100vw;
+}
+.comment {
+	padding-right: 0;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+.entry-summary a img {
+	height: unset !important;
+	width: unset !important;
+}
+
+.entry-content {
+	display: block;
+}
+.entry-content a img {
+	height: unset !important;
+	width: unset !important;
+}
+.margin-1, .depth-1 {
+	margin: 1rem;
+}
+.small-text {
+	font-size: 0.9rem;
+}
+#strava {
+	margin: 1rem auto 1rem auto;
+	width: fit-content;
 }

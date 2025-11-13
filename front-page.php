@@ -19,24 +19,22 @@
 		'post_status' => 'publish' // Show only the published posts
 	));
 	foreach( $recent_posts as $post_item ) :?>
-	<article>
+	<article class="margin-1">
 	  <header>
 		<h1>
-			<a href="<?php echo $post_item['guid']?>">
+		<a href="<?php echo $post_item['guid']?>"> <?php echo get_the_post_thumbnail($post_item['ID'], 'medium'); ?><br>
 		<?php echo $post_item['post_title']?></a></h1>
-		  <?php echo get_the_post_thumbnail($post_item['ID'], 'medium'); ?>
+		<span class="small-text">🗓️<?php echo get_the_date('', $post_item['ID']) ?>	🗣️<?php echo(the_author_meta( 'display_name' , $post_item['post_author'])); ?></span>
 	  </header>
 	  <p>
 		  <?php echo(get_the_excerpt($post_item['ID'])) ?>
 	  </p>
-	  <footer class="muted">
-		<?php echo $post_item['post_date'] ?>
-	  </footer>
+	<p><a href="<?php echo $post_item['guid']?>" class="fancy-link">Les mer...</a></p>
 	</article>
+	
 	<?php endforeach; ?>
 </div>
 
 
-<?php if ( comments_open() && !post_password_required() ) { comments_template( '', true ); } ?>
 <?php endwhile; endif; ?>
 <?php get_footer(); ?>

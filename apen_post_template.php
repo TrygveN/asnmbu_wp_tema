@@ -1,10 +1,12 @@
 <?php
-function apen_post_comments_template( $file = '/comments.php', $separate_comments = false ) {
+function apen_post_comments_template( $file = '/comments.php', $separate_comments = false) {
 	global $wp_query, $withcomments, $post, $wpdb, $id, $comment, $user_login, $user_identity, $overridden_cpage, $wp_stylesheet_path, $wp_template_path;
 
 	$apen_post_id = 154;
-	
 	if ( ! ( is_single() || is_page() || $withcomments ) || empty( $post ) ) {
+		return;
+	}
+	if ($post->ID == $apen_post_id) {
 		return;
 	}
 

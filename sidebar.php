@@ -1,11 +1,15 @@
 <?php if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
 
 <aside id="sidebar-left">
-<a><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/kadaverlogo.jpg"></a>
-<a><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/nattcuplogo.webp"></a>
+<a href="http://kadavern.oj-oj.net/"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/kadaverlogo.jpg"></a>
+<a href="https://asnmbu.oj-oj.net/ascup/2026/abnfc26.php"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/nattcuplogo.webp"></a>
 <a><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/kk-logo.webp"></a>
-<a><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/aaslogo.gif" width="110px"></a>
-<a><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/husflid.png" width="110px" style="border: double;border-color: black;"></a>
+<a href="https://www.turorientering.no/next/orienteering/organizer/375"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/turologo.png" width="110px"></a>
+<a href="https://www.asil.no/"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/aaslogo.gif" width="110px"></a>
+<a href="https://www.nmbui.no/"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/nmbui-logo-300x133.webp" width="110px"></a>
+<a href="" style="display: block; border: double;border-color: black;"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/husflid.png" width="104px"><br>Husflid</a>
+<a href="/arkiv" style="display: block; border: double;border-color: black;"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/arkiv.gif"><br>oj-oj Arkiv</a>
+<a href="https://www.instagram.com/aasnmbuorientering/" style="display: block; border: double;border-color: black;"><img src="https://gdv.hoh.mybluehost.me/website_3c4ea913/wp-content/uploads/2025/11/instagram.jpg"><br>Følg oss på instagram!</a>
 </aside>
 
 <aside id="sidebar" role="complementary">
