@@ -182,7 +182,13 @@ Text Domain: asnmbu
     /* Miscellaneous */
     --bd-muted: var(--dark-bd-muted);
     --backdrop: var(--dark-backdrop);
+	
 }
+
+[data-color-scheme="dark"] .menu li a, [data-color-scheme="dark"] .fancy-link  {
+    filter: drop-shadow(8px 8px 0 #224670);
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-color-scheme="light"]), :host:not([data-color-scheme="light"]) {
