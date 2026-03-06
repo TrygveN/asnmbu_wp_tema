@@ -1,4 +1,5 @@
 <?php
+error_log('[OJ THEME LOADED] ' . date('c'));
 add_action( 'after_setup_theme', 'blankslate_setup' );
 function blankslate_setup() {
 load_theme_textdomain( 'blankslate', get_template_directory() . '/languages' );
@@ -157,6 +158,10 @@ add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 function wps_deregister_styles() {
     wp_dequeue_style( 'wp-block-library' );
 }
+add_action( 'wp_enqueue_scripts', 'remove_global_styles' );
+function remove_global_styles(){
+    wp_dequeue_style( 'global-styles' );
+}
 add_action('init', function() {
   remove_post_type_support('post', 'markup_markdown');
 });
@@ -165,3 +170,66 @@ function custom_excerpt_length($length) {
     return 20;// Set the desired word count
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
+
+
+
+function trygve_wp_kama_img_tag_add_auto_sizes_filter( $enabled ){
+
+	// filter...
+	return false;
+}
+add_filter('wp_img_tag_add_auto_sizes', 'trygve_wp_kama_img_tag_add_auto_sizes_filter' );
+
+   // Forsøk på å få lurt Facebook og tilsvarende til å bruke fremhevet bilde fra innlegg 
+ 
+function asnmbu_add_open_graph_tags() {
+    if ( is_singular() ) {
+
+        global $post;
+
+        // Standardverdier
+        $title = get_the_title();
+        $url = get_permalink();
+        $description = wp_strip_all_tags( get_the_excerpt(), true );
+
+        // Finn fremhevet bilde
+        $image = '';
+        if ( has_post_thumbnail( $post->ID ) ) {
+            $thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+            if ( !empty( $thumbnail ) ) {
+                $image = $thumbnail[0];
+            }
+        }
+
+        ?>
+        <!-- Open Graph metadata -->
+        <meta property="og:title" content="<?php echo esc_attr( $title ); ?>" />
+        <meta property="og:description" content="<?php echo esc_attr( $description ); ?>" />
+        <meta property="og:url" content="<?php echo esc_url( $url ); ?>" />
+        <meta property="og:type" content="article" />
+
+        <?php if ( $image ) : ?>
+            <meta property="og:image" content="<?php echo esc_url( $image ); ?>" />
+        <?php endif; ?>
+
+        <meta property="og:site_name" content="<?php echo esc_attr( get_bloginfo('name') ); ?>" />
+        <?php
+    }
+}
+add_action( 'wp_head', 'asnmbu_add_open_graph_tags' );
+
+function disable_wp_emojicons() {
+
+  // all actions related to emojis
+  remove_action( 'admin_print_styles', 'print_emoji_styles' );
+  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+  remove_action( 'wp_print_styles', 'print_emoji_styles' );
+  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+  // filter to remove TinyMCE emojis - DENNE KRÆSJER EDITOREN!
+ // add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
+}
+add_action( 'init', 'disable_wp_emojicons' );

@@ -6,7 +6,9 @@ $comments_by_type = separate_comments( $comments );
 if ( !empty( $comments_by_type['comment'] ) ) :
 ?>
 <section id="comments-list" class="comments">
+<?php if (is_single()): ?>
 <h2 class="comments-title"><?php comments_number(); ?></h2>
+<?php endif; ?>
 <?php if ( get_comment_pages_count() > 1 ) : ?>
 <nav id="comments-nav-above" class="comments-navigation" role="navigation">
 <div class="paginated-comments-links"><?php paginate_comments_links(); ?></div>

@@ -1,32 +1,28 @@
 /*
-Theme Name: asnmbu_wp
+Theme Name: asnmbu
 Theme URI: https://github.com/TrygveN/asnmbu_wp_tema
 Author: Trygve
 Author URI: https://trygve.net
-Description: Donate: Baser på: https://blankslate.me/. 
-Tags: accessibility-ready, one-column, two-columns, custom-menu, featured-images, microformats, sticky-post, threaded-comments, translation-ready
-Version: 2025.1
+Tags:
+Version: 2512
 Requires at least: 5.2
 Tested up to: 6.8
 Requires PHP: 7.4
 License: GNU General Public License v3 or Later
 License URI: https://www.gnu.org/licenses/gpl.html
 Text Domain: asnmbu
-
-BlankSlate WordPress Theme 2011-2025
-BlankSlate is distributed under the terms of the GNU GPL
 */
 
 @font-face {
     font-family: Asap;
 	font-display: swap;
-    src: url("/website_3c4ea913/wp-content/fonts/Asap-Regular.woff2");
+    src: url("/wp-content/fonts/Asap-Regular.woff2");
 }
 @font-face {
     font-family: Asap;
     font-weight: bold;
 	font-display: swap;
-    src: url("/website_3c4ea913/wp-content/fonts/Asap-Bold.woff2");
+    src: url("/wp-content/fonts/Asap-Bold.woff2");
 }
 
 :root, :host {
@@ -104,12 +100,12 @@ BlankSlate is distributed under the terms of the GNU GPL
   --tr-duration: 0.2s;
   --ct-width: 1200px;
 }
-@media screen and (min-width: 600px) and (max-width: 1800px){
+@media screen and (max-width: 2000px){
   :root {
     --ft-size: 18px;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1400px) {
   :root {
     --ft-size: 16px;
   }
@@ -155,34 +151,37 @@ BlankSlate is distributed under the terms of the GNU GPL
 
 [data-color-scheme="dark"] {
   /* Colors */
-  --default: var(--dark-default);
-  --subtle: var(--dark-subtle);
-  --contrast: var(--dark-contrast);
-  --muted: var(--dark-muted);
-  --accent: var(--dark-accent);
-  --active: var(--dark-active);
-  --variant: var(--dark-variant);
-  --success: var(--dark-success);
-  --attention: var(--dark-attention);
-  --severe: var(--dark-severe);
-  --danger: var(--dark-danger);
+    --default: var(--dark-default);
+    --subtle: var(--dark-subtle);
+    --contrast: var(--dark-contrast);
+    --muted: var(--dark-muted);
+    --accent: var(--dark-accent);
+    --active: var(--dark-active);
+    --variant: var(--dark-variant);
+    --success: var(--dark-success);
+    --attention: var(--dark-attention);
+    --severe: var(--dark-severe);
+    --danger: var(--dark-danger);
 
-  /* Backgrounds */
-  --bg-default: var(--dark-bg-default);
-  --bg-subtle: var(--dark-bg-subtle);
-  --bg-contrast: var(--dark-bg-contrast);
-  --bg-muted: var(--dark-bg-muted);
-  --bg-accent: var(--dark-bg-accent);
-  --bg-active: var(--dark-bg-active);
-  --bg-variant: var(--dark-bg-variant);
-  --bg-success: var(--dark-bg-success);
-  --bg-attention: var(--dark-bg-attention);
-  --bg-severe: var(--dark-bg-severe);
-  --bg-danger: var(--dark-bg-danger);
+    /* Backgrounds */
+    --bg-default: var(--dark-bg-default);
+    --bg-subtle: var(--dark-bg-subtle);
+    --bg-contrast: var(--dark-bg-contrast);
+    --bg-muted: var(--dark-bg-muted);
+    --bg-accent: var(--dark-bg-accent);
+    --bg-active: var(--dark-bg-active);
+    --bg-variant: var(--dark-bg-variant);
+    --bg-success: var(--dark-bg-success);
+    --bg-attention: var(--dark-bg-attention);
+    --bg-severe: var(--dark-bg-severe);
+    --bg-danger: var(--dark-bg-danger);
+	--bg-blue: var(--dark-bg-blue);
+	--bg-green: var(--dark-bg-green);
 
-  /* Miscellaneous */
-  --bd-muted: var(--dark-bd-muted);
-  --backdrop: var(--dark-backdrop);
+
+    /* Miscellaneous */
+    --bd-muted: var(--dark-bd-muted);
+    --backdrop: var(--dark-backdrop);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -232,7 +231,9 @@ BlankSlate is distributed under the terms of the GNU GPL
   --dark: var(--light-default);
 }
 /* stylelint-enable no-duplicate-selectors */
-
+html, body {
+    overflow-x: hidden;
+}
 /* Header group */
 hgroup {
   padding: 0.25rem 0.5rem;
@@ -284,6 +285,19 @@ h6 {
   color: var(--muted);
   font-size: 0.85rem;
 }
+@media screen and (max-width: 1000px) {
+	h1 {
+	  font-size: 1.6rem;
+	}
+
+	h2 {
+	  font-size: 1.2rem;
+	}
+
+	h3 {
+	  font-size: 1.1rem;
+	}
+}
 
 :is(h1, h2, h3, h4, h5, h6)[id] > a {
   position: relative;
@@ -316,19 +330,6 @@ body, :host {
   line-height: 1.5;
 }
 
-:host {
-  max-width: none;
-}
-
-[data-color-scheme] {
-  background: var(--bg-default);
-  color: var(--default);
-}
-
-body > header:first-child, body > footer:last-child {
-  margin-right: -1.5rem;
-  margin-left: -1.5rem;
-}
 
 footer {
   text-align: center;
@@ -354,7 +355,6 @@ aside.left {
 
 /* Article */
 article {
-  min-width: 300px;
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
@@ -447,7 +447,7 @@ small {
 
 
 #branding img {
-	width: 5em;
+	width: 6.5em;
 	margin: 0.5em;
 	filter: drop-shadow(8px 8px 0 black);
 }
@@ -487,6 +487,9 @@ small {
 	}
 	#branding {
 		margin: auto;
+	}
+	.menu {
+		margin: 5px 0 5px 0;
 	}
 	.menu li a, .fancy-link{
 		font-size: 1.2em;
@@ -784,7 +787,8 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 
 .flex {
 	display: flex;
-	flex-wrap: wrap;
+	overflow: auto;
+	mask-image: linear-gradient(to right, black 95%, transparent);
 }
 
 .small-date {
@@ -807,9 +811,6 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		width: 100%;
 	  padding:0.2rem;
 	}
-	.flex{
-		flex-wrap: wrap;
-	}
 }
 
 
@@ -823,16 +824,19 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
     "sidebar-left content sidebar";
 }
 .wp-post-image {
-	max-width: 80% !important;
-	max-height: 500px !important;
+	max-width: 100%;
+	max-height: 100%;
 	object-fit: contain;
 	margin-left: auto;
 	margin-right: auto;
+	display: block;
+	width: unset !important;
+	height: unset !important;
 }
 .attachment-post-thumbnail{
 	height: unset !important;
   	width: unset !important;
-	max-height: 250px !important;
+	max-height: 160px !important;
 	max-width: 100% !important;
 }
 .attachment-full {
@@ -845,9 +849,8 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 	max-height: 500px !important;
 }
 #content {
-  grid-area: content;
+	grid-area: content;
 }
-
 #sidebar {
   grid-area: sidebar;
   font-size: 0.95rem;
@@ -862,12 +865,13 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 }
 #content {
 	margin: 1rem;
-	max-width: 1200px;
-	min-width: 70%;
+	width: 1100px;
+	max-width: 50dvw;
   	justify-self: center;
 }
 
-@media screen and (max-width: 1400px) and (min-width: 1000px) {
+
+@media screen and (max-width: 1200px) and (min-width: 800px) {
 	#container {
 	  overflow: hidden;
 	  margin: 0;
@@ -877,18 +881,25 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		"content sidebar"
 		"sidebar-left sidebar-left";
 	}
-	.flex{
-		flex-wrap: wrap;
+	#content {
+		max-width: 100%
 	}
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1200px) {
 	#sidebar-left {
 		display: flex;
+		flex-direction: column;
+		height: 500px;
 		flex-wrap: wrap;
 	}
-	
+	#sidebar-left a {
+		width: fit-content;
+	}
+	#content {
+		max-width: 100%
+	}
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
 	#container {
 	  overflow: hidden;
 	  margin: 0;
@@ -900,8 +911,6 @@ button[type]:not([type="button"]), input:is([type="submit"], [type="reset"]) {
 		"sidebar-left";
 	}
 	.wp-post-image {
-		max-width: 90% !important;
-		max-height: 200px !important;
 		object-fit: contain;
 	}
 	#content {
@@ -934,13 +943,14 @@ p img {
   margin: -1px;
   overflow: hidden;
   padding: 0;
-  position: absolute;
   width: 1px;
   word-wrap: normal !important;
+  display: none;
 }
 .entry-summary a img {
 	height: unset !important;
 	width: unset !important;
+	max-height: 60dvh;
 }
 
 .entry-content {
@@ -954,9 +964,76 @@ p img {
 	margin: 1rem;
 }
 .small-text {
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 }
 #strava {
 	margin: 1rem auto 1rem auto;
 	width: fit-content;
+}
+/* Justerer størrelsen på NMBUI-logoen */
+.nmbui-logo {
+    max-width: 200px;   /* eller 240 / 220, juster til det matcher Ås IL-logoen */
+    margin: 0 auto;
+}
+
+.nmbui-logo img {
+    display: block;
+    width: 100%;        /* fyller hele figur-bredden */
+    height: auto;
+}
+.alignleft {
+	float: left;
+	margin-right: 30px;
+}
+
+.alignright {
+	float: right;
+	margin-left: 30px;
+}
+
+.aligncenter {
+	display: block;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.teaser {
+	font-size: 0.8em;
+	min-width: 220px;
+}
+.teaser h2{
+	font-size: 1.5em;
+	margin: 0.2rem 0 0.2rem 0;
+}
+.teaser p {
+	margin: 0.4rem;
+} 
+.teaser figure {
+	margin: 0;
+	height: 167px;
+}
+@media screen and (max-width: 600px) {
+	.teaser {
+		margin: 1rem;
+	}
+	.flex {
+		overflow-x: auto;
+  		width: 100vw;
+		flex-wrap: unset;
+		mask-image: unset;
+	}
+	.alignleft {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
+	.alignright {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
 }

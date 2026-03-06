@@ -218,3 +218,48 @@ function apen_post_comments_template( $file = '/comments.php', $separate_comment
 		require ABSPATH . WPINC . '/theme-compat/comments.php';
 	}
 }
+   // Alternativ kompakt liste over X siste kommentarer på Åpen post, trimmet til 30 ord. 
+   // Funksjonen  henter de X siste godkjente kommentarene til Åpen post-innlegget (ID 154) fra databasen, 
+   // sortert med nyeste øverst. Den viser dem som en kort liste, sammen med en lenke til hele Åpen post-siden. 
+   // Pakket inn i en <div> med egne CSS-klasser, så de kan styles det som vi vil, og all tekst/innhold blir renset for sikkerhet. 
+   // Antall kommentarer som brukes kan overstyres i funksjonskallet. Se sidebar.php
+function apen_post_mini_list( $apen_post_id = 154, $number = 5 ) {
+ 
+    $latest_comments = get_comments( array(
+        'post_id' => $apen_post_id,
+        'number'  => absint( $number ),
+        'status'  => 'approve',
+        'orderby' => 'comment_date_gmt',
+        'order'   => 'DESC',
+    ) );
+    ?>
+    <div class="apen-mini">
+        <h3 class="apen-mini-title">
+            <?php esc_html_e( 'Siste kommentarer i Åpen post', 'blankslate' ); ?>
+        </h3>
+
+        <?php if ( ! empty( $latest_comments ) ) : ?>
+            <ul class="apen-mini-list">
+                <?php foreach ( $latest_comments as $comment ) : ?>
+                    <li class="apen-mini-item">
+                        <strong class="apen-mini-author">
+                            <?php echo esc_html( get_comment_author( $comment ) ); ?>:
+                        </strong>
+                        <?php echo esc_html( wp_trim_words( $comment->comment_content, 30 ) ); ?>   
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else : ?>
+            <p class="apen-mini-empty">
+                <?php esc_html_e( 'Ingen kommentarer ennå.', 'blankslate' ); ?>
+            </p>
+        <?php endif; ?>
+
+        <p class="apen-mini-link-wrap">
+            <a class="apen-mini-link" href="<?php echo esc_url( get_permalink( $apen_post_id ) ); ?>">
+                <?php esc_html_e( 'Se alle →', 'blankslate' ); ?>
+            </a>
+        </p>
+    </div>
+    <?php
+}
